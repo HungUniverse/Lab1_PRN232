@@ -1,0 +1,21 @@
+@host = http://localhost:5191
+
+GET {{host}}/api/students?page=1&size=10&sort=fullName&fields=studentId,fullName,email
+Accept: application/json
+
+###
+
+GET {{host}}/api/students/1
+Accept: application/json
+
+###
+
+GET {{host}}/api/enrollments?search=active&sort=-enrollDate&page=1&size=20&fields=enrollmentId,status&expand=student,course
+Accept: application/json
+
+###
+
+GET {{host}}/api/courses?page=1&size=10&expand=semester,subject,enrollments
+Accept: application/json
+
+###

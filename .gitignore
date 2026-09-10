@@ -1,0 +1,62 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Aa]rtifacts/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Visual Studio and Rider
+.vs/
+.idea/
+*.suo
+*.user
+*.rsuser
+*.sln.docstates
+*.DotSettings.user
+
+# Visual Studio Code
+.vscode/
+
+# Test and coverage output
+[Tt]est[Rr]esults/
+*.trx
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# NuGet artifacts
+packages/
+*.nupkg
+*.snupkg
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+appsettings.*.Local.json
+secrets.json
+*.pfx
+*.snk
+
+# Logs, temporary files, and generated local output
+*.log
+tmp/
+output/
+*.tmp
+*.bak
+
+# Local database files
+*.mdf
+*.ldf
+*.db
+*.db-shm
+*.db-wal
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
