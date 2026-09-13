@@ -2,9 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRN232.LMS.API", "PRN232.LMS.API\PRN232.LMS.API.csproj", "{0D8735FD-82B4-4F94-A09D-572E88DC35CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRN232.LMS.Service", "PRN232.LMS.Service\PRN232.LMS.Service.csproj", "{0D4D259E-C737-43C5-9AEB-5A619FB310A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRN232.LMS.Services", "PRN232.LMS.Services\PRN232.LMS.Services.csproj", "{0D4D259E-C737-43C5-9AEB-5A619FB310A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRN232.LMS.Repository", "PRN232.LMS.Repository\PRN232.LMS.Repository.csproj", "{30EC6567-F92D-4B29-9236-622BB1509847}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRN232.LMS.Repositories", "PRN232.LMS.Repositories\PRN232.LMS.Repositories.csproj", "{30EC6567-F92D-4B29-9236-622BB1509847}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

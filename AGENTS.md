@@ -4,13 +4,14 @@
 
 - Follow the existing API -> Service -> Repository architecture.
 - Keep controllers in `PRN232.LMS.API`.
-- Keep business logic and request/response models in `PRN232.LMS.Service`.
-- Keep Entity Framework Core entities, mappings, migrations, and database access in `PRN232.LMS.Repository`.
+- Keep business logic and business models in `PRN232.LMS.Services`.
+- Keep Entity Framework Core entities, mappings, migrations, and database access in `PRN232.LMS.Repositories`.
+- Keep HTTP request and response models in `PRN232.LMS.API`.
 - Do not change the existing architecture unless the user explicitly requests it.
 
 ## Database
 
-- Use `AppDBContext` from `PRN232.LMS.Repository`.
+- Use `AppDBContext` from `PRN232.LMS.Repositories`.
 - Read `DefaultConnection` from `PRN232.LMS.API/appsettings.json`.
 - Never hard-code connection strings.
 - Use asynchronous Entity Framework Core methods.

@@ -1,12 +1,6 @@
-using Microsoft.EntityFrameworkCore;
+using PRN232.Lab1.API.ResponseModels;
 using PRN232.Lab1.Repository;
-using PRN232.Lab1.Repository.Repositories;
-using PRN232.Lab1.Service.Base;
-using PRN232.Lab1.Service.CourseService;
-using PRN232.Lab1.Service.EnrollmentService;
-using PRN232.Lab1.Service.SemesterService;
-using PRN232.Lab1.Service.StudentService;
-using PRN232.Lab1.Service.SubjectService;
+using PRN232.Lab1.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,36 +22,33 @@ builder.Services.AddControllers()
                 ApiResponse<object>.Failed("The request is invalid", errors));
         };
     });
-builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connectionString));
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
     options.CustomSchemaIds(type => (type.FullName ?? type.Name).Replace('+', '.')));
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-builder.Services.AddScoped<IStudentService, StudentService>();
-builder.Services.AddScoped<ISemesterService, SemesterService>();
-builder.Services.AddScoped<ISubjectService, SubjectService>();
-builder.Services.AddScoped<ICourseService, CourseService>();
-builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
+builder.Services.AddRepositories(connectionString);
+builder.Services.AddServices();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDBContext>();
-    dbContext.Database.Migrate();
-}
+var databaseLifecycle = app.Services.GetRequiredService<IDatabaseLifecycleService>();
+await databaseLifecycle.InitializeAsync(app.Lifetime.ApplicationStopping);
+
+app.MapGet("/health", async (CancellationToken cancellationToken) =>
+    await databaseLifecycle.IsReadyAsync(cancellationToken)
+        ? Results.Ok(ApiResponse<HealthResponse>.Succeeded(
+            new HealthResponse { Status = "Healthy" },
+            "Database is ready"))
+        : Results.Json(
+            ApiResponse<object>.Failed("Database is not ready"),
+            statusCode: StatusCodes.Status503ServiceUnavailable))
+    .Produces<ApiResponse<HealthResponse>>(StatusCodes.Status200OK)
+    .Produces<ApiResponse<object>>(StatusCodes.Status503ServiceUnavailable)
+    .WithName("Health");
 
 app.Run();

@@ -13,7 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PRN232.LMS.Service\PRN232.LMS.Service.csproj" />
+      <ProjectReference Include="..\PRN232.LMS.Services\PRN232.LMS.Services.csproj" />
+      <ProjectReference Include="..\PRN232.LMS.Repositories\PRN232.LMS.Repositories.csproj" />
     </ItemGroup>
 
 </Project>

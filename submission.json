@@ -1,0 +1,35 @@
+{
+  "studentCode": "SE193324",
+  "fullName": "Vũ Đức Hùng",
+  "className": "SE1920",
+  "projectName": "LMS",
+  "apiBasePath": "/api",
+  "healthPath": "/health",
+  "swaggerJsonPath": "/swagger/v1/swagger.json",
+  "database": "sqlserver",
+  "resources": {
+    "students": "/api/students",
+    "semesters": "/api/semesters",
+    "subjects": "/api/subjects",
+    "courses": "/api/courses",
+    "enrollments": "/api/enrollments"
+  },
+  "implemented": {
+    "search": true,
+    "sort": true,
+    "paging": true,
+    "selection": true,
+    "expansion": true,
+    "create": true,
+    "update": true,
+    "delete": true
+  },
+  "knownIds": {
+    "students": 1,
+    "courses": 1,
+    "enrollments": 1,
+    "subjects": 1,
+    "semesters": 1
+  },
+  "notes": ""
+}

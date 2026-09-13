@@ -1,49 +1,20 @@
 # PRN232 Lab 1 - LMS REST API
 
-ASP.NET Core 8 REST API for a Learning Management System using the existing
-API -> Service -> Repository architecture.
+- Student: SE193324 - Vũ Đức Hùng - SE1920
+- Database: Microsoft SQL Server 2022
+- Architecture: `PRN232.LMS.API` → `PRN232.LMS.Services` → `PRN232.LMS.Repositories`
 
-## Run locally
-
-1. Ensure SQL Server Express is available as `.\\SQLEXPRESS`.
-2. From the solution directory, run:
-
-   ```powershell
-   dotnet ef database update --project PRN232.LMS.Repository --startup-project PRN232.LMS.API
-   dotnet run --project PRN232.LMS.API
-   ```
-
-3. Open the Swagger URL printed by the application.
-
-## Run with Docker Compose
+## Run
 
 ```powershell
-docker compose up --build
+docker compose up --build -d
 ```
 
-Swagger is available at <http://localhost:8080/swagger>.
+Swagger: <http://localhost:8080/swagger>  
+Health check: <http://localhost:8080/health>
 
-Stop the containers with:
+The application automatically retries the database connection, applies EF Core migrations, and seeds data during startup. Seed data contains 5 semesters, 10 subjects, 20 courses, 50 students, and 500 enrollments. Known test IDs for all five resources start at `1`.
 
-```powershell
-docker compose down
-```
+All collection endpoints support `search`, `sort`, `page`, `size`, `fields`, and `expand`. Stop and remove the Lab 1 containers with `docker compose down -v`.
 
-Use `docker compose down -v` only when you intentionally want to delete the
-SQL Server data volume.
-
-## Resources
-
-- `/api/students`
-- `/api/semesters`
-- `/api/subjects`
-- `/api/courses`
-- `/api/enrollments`
-
-Every collection endpoint accepts `search`, `sort`, `page`, `size`, `fields`,
-and `expand`. For example:
-
-```text
-GET /api/students?search=student&sort=fullName,-dateOfBirth&page=2&size=10&fields=studentId,fullName,email&expand=enrollments
-GET /api/enrollments?search=active&sort=-enrollDate&page=1&size=20&fields=enrollmentId,status&expand=student,course
-```
+Known limitations: none.
